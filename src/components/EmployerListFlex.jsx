@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import EmployerFlexRow from "./EmployerFlexRow";
-import useWindowsDimensions from "../../../../baseApplications/nurse/src/components/supporting/UseWindowsDimensions";
+import useWindowsDimensions from "/src/components/supporting/UseWindowsDimensions";
 
 const EmployerlistFlex = ({highlight,chooseFunc,remFunc,reload,topText="",showChoose=false,showEdit=true,showRemove=true,allEmployers}) => {
     let profile = useSelector((state)=> state.cne.cneProfile ? state.cne.cneProfile : {});
