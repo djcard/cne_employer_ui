@@ -1,10 +1,9 @@
 import { useSelector } from "react-redux";
 import EmployerRow from "./EmployerRow";
-import useWindowsDimensions from "../../../../baseApplications/nurse/src/components/supporting/UseWindowsDimensions";
 
-const Employerlist = ({highlight,chooseFunc,remFunc,reload,topText="",showChoose=false,showEdit=true,showRemove=true,allEmployers=[]}) => {
+const Employerlist = ({highlight,chooseFunc,remFunc,reload,topText="",showChoose=false,showEdit=true,showRemove=true,allEmployers}) => {
     let profile = useSelector((state)=> state.cne.cneProfile ? state.cne.cneProfile : {});
-    allEmployers = allEmployers || Object.hasOwn(profile,"employers") ? profile.employers : [];
+    //allEmployers = allEmployers || Object.hasOwn(profile,"employers") ? profile.employers : [];
 
     const chosenEmp = (item) => {
         chooseFunc(item);
@@ -13,7 +12,6 @@ const Employerlist = ({highlight,chooseFunc,remFunc,reload,topText="",showChoose
     const remEmployer = (item) => {
         remFunc(item);
     }
-
 
     return         <div>
     <p>{topText}</p>
@@ -31,7 +29,7 @@ const Employerlist = ({highlight,chooseFunc,remFunc,reload,topText="",showChoose
                                 : "";
 
                         return <EmployerRow item={{
-                            name:item.orgname,
+                            name:item.orgname ? item.orgname : item.name,
                             street:item.street,
                             city:item.city,
                             state:item.state,

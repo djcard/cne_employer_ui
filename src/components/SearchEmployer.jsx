@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { saveEmployer, searchHospitals } from "../containers/employerMethods";
-import EmployerRow from "./EmployerRow";
+import EmployerListTable from "./EmployerListTable";
+import EmployerListFlex from "./EmployerListFlex";
 import {useSelector, useDispatch} from "react-redux";
 import MessageBoard from "/src/components/supporting/MessageBoard";
 import SearchNPI from "./SearchNPI";
 import SearchName from "./SearchName";
+import useWindowsDimensions from "/src/components/supporting/UseWindowsDimensions";
 var call = {};
 
 const searchEmployer = ( dispatch, token, val, searchMethod="name" ) => {
@@ -21,22 +23,24 @@ const SearchEmployer = ({chooseFunc,searchMode}) => {
     let [usstate,setUsstate] = useState("");
     chooseFunc = chooseFunc || saveEmployer;
     
+    const { height,width } = useWindowsDimensions();
+    const mdBreakpoint = getComputedStyle(document.body).getPropertyValue('--bs-breakpoint-lg');
     
     let results = useSelector(state => state.cne?.employerResults) || [];
-
     let token = useSelector(state => state.user?.token) || "";
     let dispatch = useDispatch();
 
     const employerChosen = (item) => {
         chooseFunc(item);
     }
-    const remEmployer = (item) => {
-        removeEmployer(dispatch, token, item);
-    }
 
     let topArea = searchMode === "npi" 
         ? <SearchNPI />
         : <SearchName />;
+
+        let empList = width > parseInt(mdBreakpoint) 
+        ?  <EmployerListTable chooseFunc={employerChosen} showChoose={1} showEdit={false} showRemove={false} allEmployers={results} topText={"Current and Past Employers"} />
+        : <EmployerListFlex chooseFunc={employerChosen} showChoose={1} showEdit={false} showRemove={false} allEmployers={results} topText={"Current and Former Employers"}/>
 
 
 
@@ -46,32 +50,12 @@ const SearchEmployer = ({chooseFunc,searchMode}) => {
             <div>
                 {topArea}
             </div>
-          
-            <table className="table table-striped table-bordered table-hover" style={{maxHeight:"100%"}}>
-                <thead>
-                    <tr><td colSpan="8">Search Results</td></tr>
-                </thead>
-                <tbody style={{overflow:"scroll"}}>
-                {results.map((item)=>{
-                    return <EmployerRow item={{
-                        name:item.name,
-                        street:item.street,
-                        city:item.city,
-                        state:item.state,
-                        zip:item.zip,
-                        MEDICARE_PROVIDER_NUMBER:item.medicare_provider_number,
-                        orguuid:item?.orguuid,
-                        npinumber:item?.npinumber
-                    }} key={item.medicare_provider_number + '_' + item.orguuid + '_' + item.name} 
-                      chooseFunc={employerChosen}
-                    showChoose={1}
-                    showEdit={false}
-                    showRemove={false}
-                    />
-                })}
-                {results?.length === 0 ? <tr><td colSpan="8">No results found</td></tr> : null}
-                </tbody>
-            </table>
+            <div>
+                {empList}
+            </div>
+            <div>
+
+            </div>
         </div>
     </div>
 }

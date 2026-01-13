@@ -26,15 +26,8 @@ const SearchName = () => {
     Note: Sometimes punctuation such as periods or apostrophes are not consistent. If you are not getting the results 
     you need, try a word without punctuation which is part of the hospital's name.</p>
     <div className="row mb-3">
-    <div className="col-3">
-            <select className="form-control" onChange={(evt)=>{setUSState(evt.currentTarget.value)}} value={usstate}>
-                <option>State</option>
-                {allLicenseAreas.map((item)=>{
-                        return <option value={item.code} >{item.name}</option>
-                    })}
-            </select>
-        </div>
-        <div className="col-9">
+    
+        <div className="col-12">
             <input type="text" className="form-control" placeholder="Search Facilities" onChange={(evt)=>{searchEmployer(dispatch, token, evt.currentTarget.value, "name")}} />
         </div>
         
@@ -43,3 +36,14 @@ const SearchName = () => {
 }
 
 export default SearchName;
+
+/*
+<div className="col-3">
+            <select className="form-control" onChange={(evt)=>{setUSState(evt.currentTarget.value)}} value={usstate}>
+                <option>State</option>
+                {allLicenseAreas.map((item)=>{
+                        return <option value={item.code} >{item.name}</option>
+                    })}
+            </select>
+        </div>
+*/
