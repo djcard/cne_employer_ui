@@ -17,9 +17,6 @@ const Employerlist = ({highlight,chooseFunc,remFunc,reload,topText="",showChoose
     <p>{topText}</p>
         <div className="table-responsive">
             <table className="table table-striped table-bordered table-sm">
-                <thead>
-                    <tr><td colSpan="8"><h5>Current and Former Employers</h5></td></tr>
-                </thead>
                 <tbody>
                     {allEmployers?.map((item)=>{
                         let check = item.employerid

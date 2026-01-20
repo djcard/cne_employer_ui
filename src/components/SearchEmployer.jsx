@@ -39,8 +39,8 @@ const SearchEmployer = ({chooseFunc,searchMode}) => {
         : <SearchName />;
 
         let empList = width > parseInt(mdBreakpoint) 
-        ?  <EmployerListTable chooseFunc={employerChosen} showChoose={1} showEdit={false} showRemove={false} allEmployers={results} topText={"Current and Past Employers"} />
-        : <EmployerListFlex chooseFunc={employerChosen} showChoose={1} showEdit={false} showRemove={false} allEmployers={results} topText={"Current and Former Employers"}/>
+        ?  <EmployerListTable chooseFunc={employerChosen} showChoose={1} showEdit={false} showRemove={false} allEmployers={results} topText={""} />
+        : <EmployerListFlex chooseFunc={employerChosen} showChoose={1} showEdit={false} showRemove={false} allEmployers={results} topText={""}/>
 
 
 

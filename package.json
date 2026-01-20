@@ -1,6 +1,6 @@
 {
   "name": "@djcard/cne_employer",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "The main wrapper for the CNE Dashboard using the ynex theme.",
   "main": "index.js",
   "scripts": {
